@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>GraderAide</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="uvutheme.css">-->
     <style>
         .clickable {
             cursor: pointer;
@@ -78,7 +79,7 @@
                                 <select class="custom-select custom-select-lg mb-3" v-model="currentAssignment"
                                         @change="getAssignment()">
                                     <option selected disabled>Select Assignment</option>
-                                    <option v-for="assignment in assignments" v-bind:value="assignment.id">
+                                    <option v-for="assignment in assignments" :value="assignment.id">
                                         {{assignment.id}}
                                     </option>
                                 </select>
@@ -183,13 +184,13 @@
         <div class="modal-body">
             <div class="form-group">
                 <label for="assignment">Name</label>
-                <input type="email" class="form-control" id="assignment" placeholder="Name" v-bind:value="assignment.id"
-                       v-on:input="updateValue($event.target.value,)" lazy>
+                <input type="email" class="form-control" id="assignment" placeholder="Name" :value="assignment.id"
+                       :input="updateValue($event.target.value,)" lazy>
             </div>
             <div class="form-group">
                 <label for="points">Points</label>
-                <input type="number" class="form-control" id="points" placeholder="0" v-bind:value="assignment.points"
-                       v-on:input="updatePoints($event.target.value)" lazy>
+                <input type="number" class="form-control" id="points" placeholder="0" :value="assignment.points"
+                       :input="updatePoints($event.target.value)" lazy>
             </div>
         </div>
         <div class="modal-footer">
@@ -314,7 +315,7 @@
         },
         computed: {
             actualPts: function () { //add up all selected pts and subtract from totalPts
-                return this.selectedRules.reduce((acc, el) => Number(acc) + Number(el.pts), this.totalPts);
+                return this.selectedRules.reduce((acc, el) => acc + el.pts, this.totalPts);
 
                 //   let sum = this.totalPts;
                 //   for (rule of this.selectedRules) {
